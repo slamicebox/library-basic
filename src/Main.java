@@ -6,15 +6,27 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int optiuneuser;
         int optiuneadmin;
+        String password;
 
         System.out.println("Login");
 
         System.out.println("Username:");
         String user = scanner.nextLine();
+        int role=0;
 
-        System.out.println("Parola:");
-        String password = scanner.nextLine();
-        if (user.equalsIgnoreCase("admin") && password.equalsIgnoreCase("bookadmin")) {
+        if(user.equalsIgnoreCase("admin"))
+        {
+            System.out.println("Parola:");
+            password = scanner.nextLine();
+            while (!password.equalsIgnoreCase("bookadmin"))
+            {
+                System.out.println("Parola gresita ! Te rog sa introduci parola: ");
+                password = scanner.nextLine();
+            }
+            role=1;
+        }
+        if(user.equalsIgnoreCase("user")) role=2;
+        if (role==1) {
             do {
                 System.out.println("\nMeniu:");
                 System.out.println("1. Adaugă o carte");
@@ -79,10 +91,10 @@ public class Main {
                     default:
                         System.out.println("Opțiune invalidă.");
                 }
-            } while (optiuneadmin != 5);
+            } while (optiuneadmin !=5);
         }
 
-        if (user.equalsIgnoreCase("user")) {
+        if (role == 2) {
             do {
                 System.out.println("\nMeniu:");
                 System.out.println("1. Afișează toate cărțile");
